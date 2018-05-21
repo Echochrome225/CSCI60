@@ -1,0 +1,251 @@
+-- CSci 60 Lab 1
+
+---------------- Part 1 ----------------
+
+-- Work through Chapters 1 - 3 of Learn You a Haskell for Great Good!
+-- Type in the examples and make sure you understand the results.
+-- Ask questions about anything you don't understand! This is your
+-- chance to get off to a good start understanding Haskell.
+
+
+---------------- Part 2 ----------------
+
+-- The Haskell Prelude has a lot of useful built-in functions related
+-- to numbers and lists.  In Part 2 of this lab, you will catalog many
+-- of these functions.
+
+data Color = Red | Orange | Yellow | Green | Blue | Violet
+     deriving (Show, Eq, Ord, Enum)
+
+-- For each of the Prelude functions listed below, give its type,
+-- describe in your own words what the function does, answer any
+-- questions specified, and give several examples of its use, including
+-- some examples involving the type "Color", if applicable.
+
+
+-- succ
+      -- type: a -> a
+      -- desc: finds the successor to the inputed item
+      -- ex: succ 5 = 6, succ Red = Orange
+-- pred
+      -- type: a -> a
+      -- desc: outputs the previous of the inputed item
+      -- ex: pred 5 = 4, pred Green = Orange
+-- toEnum
+      -- type: Int -> a
+      -- desc: returns item from specific positon
+      -- ex: 35::Char = '#', 
+-- fromEnum
+      -- type:  a -> Int
+      -- desc: returns the specified position for the item
+      -- ex: fromEnum '#' = 35, fromEnum Blue = 4;
+-- enumFrom
+      -- type: a -> [a]
+      -- desc: returns array starting at specifid position
+      -- ex: take 3 (enumFrom '1') = "123", enumFrom Blue = [Blue,Violet]
+-- enumFromThen
+      -- type: a -> a -> [a]
+      -- desc: creates a list with the distance between the two
+      -- ex: take 5 (enumFromThen 2 4) = [2,4,6,8,10], take 3 (enumFromThen 3 4) = [3,4,5]
+-- enumFromTo
+      -- type: a -> a -> [a]
+      -- desc: creates a list from the first element to the second
+      -- ex: enumFromTo 1 5 = [1,2,3,4,5], enumFromTo Yellow Blue = [Yellow,Green,Blue]
+-- enumFromThenTo
+      -- type: a -> a -> a -> [a]
+      -- desc: returns an array from the first element to the third element, with a distance from the second.
+      -- ex: enumFromThenTo 1 4 8 = [1,4,7], enumFromThenTo Red Green Violet = [Red,Green]
+-- ==,
+      -- type: Int -> Int -> Bool
+      -- desc: checks if the first element is equal to the second element
+      -- ex: 2 == 2 = True, Orange == Blue = False
+-- /=
+      -- type: Int -> Int -> Bool
+      -- desc: checks if the first element is not equal to the second element.
+      -- ex: 2 /= 2 = False, Orange /= Blue = True
+-- quot
+      -- type: Int -> Int -> Int
+      -- desc: divides between two integers, rounded towards zero
+      -- ex: quot (-3) 2 = -1, quot (-10) 2 = -5
+-- div
+      -- type: Int -> Int -> Int
+      -- desc: divides between two integers, rounded towards negative infinity
+      -- ex: div (-3) 2 = -2, div (-5) 2 = -3
+      -- q: what makes this different from quot? a: as a result, quot and div round differently, where quot truncates towards zero, as opposed to negative infinity
+-- rem
+      -- type: a -> a -> a
+      -- desc: returns remainder of the two integers divided
+      -- ex: 33 `rem` (-12) = -9
+-- mod
+      -- type: a -> a -> a
+      -- desc: returns remainder of the two integers divided rounding towards negative infinity
+      -- ex: 33 `mod` (-12) = -3
+      -- q: what makes this different from rem?
+-- quotRem
+      -- type: a -> Rational
+      -- desc: returns the result of the division and the remainder
+      -- ex: quotRem 10 2 = (5,0), quotRem 6 5 = (1,1)
+-- divMod
+      -- type: a -> a -> (a,a)
+      -- desc: returns both results of divison and modulo.
+      -- ex: divMod 10 (-2) = (-5,0), divMod (-10) 2 = (-5,0)
+-- &&
+      -- type: Bool -> Bool -> Bool
+      -- desc: function for AND
+      -- ex: True && True = True, Red == Red && Blue == Blue = True
+-- ||
+      -- type: Bool -> Bool -> Bool
+      -- desc: function for OR
+      -- ex: True || False = True, Red == Blue || Blue == Blue = True
+-- ++
+      -- type: [a] ++ [a] -> [a]
+      -- desc: combines two lists together
+      -- ex: [1,2,3] ++ [4]
+-- compare
+      -- type: a -> a -> Ordering
+      -- desc: takes two elements and returns LT if first ocmponent is less than second component, otherwise returns GT.
+      -- ex: compare 20.1 20 = GT, compare 10 20 = LT, compare Orange Violet = LT
+-- <, >
+      -- type: a -> a -> Bool
+      -- desc: returns True if first component is larger than the second component, otherwise returns False./ other function vice versa
+      -- ex: Blue < Red = False, 5 > 6 = False
+-- max
+      -- type: a -> a -> a
+      -- desc: returns the larger of the two inputs
+      -- ex: max 10 12 = 12, max 5 6 = 6, max Orange Red = Orange
+-- min
+      -- type: a -> a -> a
+      -- desc: returns the smaller of the two inputs
+      -- ex: min 10 12 = 10, min 5 6 = 5
+-- ^
+      -- type: num a -> a
+      -- desc: raise number to specified power
+      -- ex: 6^2 = 36, 3^2 = 9
+-- all
+      -- type: (a -> Bool) -> [a] -> Bool
+      -- desc: returns true/false if the list meets the condition
+      -- ex: all (<8) [4,5,6,7,10] = False, all (<5) [1,2,3] = True
+-- any
+      -- type: (a -> Bool) -> [a] -> Bool
+      -- desc: returns true if any of the list meets the parameters
+      -- ex: any (<8) [4,5,6,7,10] = True, any (<1) [2,3,4,5,6]
+-- break
+      -- type: (a -> Bool) -> [a] -> ([a], [a])
+      -- desc:creates two lists; one that satisfies the parameters and one that doesn't.
+      -- ex: break (>2) [1,2,3,4,5] = ([1,2],[3,4,5]), break (>3) [1,2,3,5,6] = ([1,2,3],[5,6])
+-- concat
+      -- type: [[a]] -> [a]
+      -- desc: takes two lists and groups them together.
+      -- ex: concat [[1],[2,]] = [1,2]
+-- const
+      -- type: a -> b -> a
+      -- desc: returns a set element for all listed elements.
+      -- ex: map (const 1) [1,2,3] = [1,1,1] 
+-- cycle
+      -- type: [a] -> [a]
+      -- desc: repeats a list in an infinite cycle
+      -- ex: [1,2,3] = 1,2,3,1,2,3... 
+-- drop
+      -- type: Int -> [a] -> [a]
+      -- desc: drops the beginning N elements of a list
+      -- ex: drop 2 [1,2,3,4] = [3,4]
+-- take
+      -- type: Int -> [a] -> [a]
+      -- desc: takes the first N elements of a list
+      -- ex: take 3 [10,11,12,13,14] = [10,11,12]
+-- dropWhile
+      -- type: (a -> Bool) -> [a] -> [a]
+      -- desc: takes a list and creates a new one without the condition
+      -- ex: dropWhile (<2) [1,2,3,4] = [2,3,4]
+-- takeWhile
+      -- type: (a -> Bool) -> [a -> [a]
+      -- desc: takes a list and creates a new one with the condition
+      -- ex: takeWhile (<2) [0,1,2,3] = [0,1]
+-- elem
+      -- type: a -> [a] -> Bool
+      -- desc: returns True if the list contains the specified element
+      -- ex: elem 0 [0,1,2,3,4] = True
+-- even
+      -- type: a -> Bool
+      -- desc: returns True if even, otherwise returns False
+      -- ex: even 10 = True, even 9 = False
+-- filter
+      -- type: (a -> Bool) -> [a] -> [a]
+      -- desc: returns elements from second argument that satisfy the first argument
+      -- ex: filter odd [1,2,3,4,5] = [1,3,5]
+-- fst
+      -- type: (a,a) -> a
+      -- desc: takes a pair and then returns the first component
+      -- ex: fst (1,2) = 1, fst (Blue,Orange) = Blue
+-- gcd
+      -- type: a -> a -> a
+      -- desc: finds greatest common divisor
+      -- ex: gcd 10 8 = 2
+-- head
+      -- type: [a] -> a
+      -- desc: takes a list then returns its first element
+      -- ex: head [3,2,1] = 3
+-- id
+      -- type: a -> a
+      -- desc: returns the identity of the element
+      -- ex: id [1,2,3] = [1,2,3]
+-- init
+      -- type: [a] -> [a]
+      -- desc: takes a list and returns everything except its last element
+      -- ex: [1,2,3] = [1,2]
+-- iterate
+      -- type: (a -> a) -> a -> [a]
+      -- desc: creates a list that applies a function from the second argument to the third
+      -- ex: take 5 (iterate (2*)1) = [1,2,4,8,16]
+-- last
+      -- type: [a] -> a
+      -- desc: returns the last of the list
+      -- ex: last [1,2,3] = 3
+-- lcm
+      -- type: a -> a -> a
+      -- desc: finds least common multiple
+      -- ex: lcm 10 12 = 60
+-- length
+      -- type:
+      -- desc: takes a list and returns its length
+      -- ex: length [1,2,3,4] = 4, length [23,25] = 2
+-- map
+      -- type: (a -> b) -> [a] -> [b]
+      -- desc: returns list with a function applied
+      -- ex: map abs [-1,-2] = [1,2]
+-- null
+      -- type: [a] -> Bool
+      -- desc: checks if a list is empty. Returns True if true, otherwise returns False
+      -- ex: null [] = True, null [1] = False
+-- odd
+      -- type: a -> True/False
+      -- desc: returns True if odd, otherwise returns False
+      -- ex: odd 9 = True, odd 10 = False
+-- repeat
+      -- type: a -> [a]
+      -- desc: takes and element then creates an infinite list of said element
+      -- ex: take 5 (repeat 2) = [2,2,2,2,2] 
+-- replicate
+      -- type: a -> a -> [a]
+      -- desc: takes an element and repeats it a specified amount of times
+      -- ex:
+-- reverse
+      -- type: [a] -> [a]
+      -- desc: takes a list and reverses it
+      -- ex: reverse [1,2,3] = [3,2,1]
+-- snd
+      -- type: (a,a) -> a
+      -- desc: takes a pair then returns the last component
+      -- ex: snd (1,2) = 2
+-- span
+      -- type: Bool -> [a] -> ([a],[a])
+      -- desc: creates a list with a break when specification is met
+      -- ex: span (/=3) [1,2,3,4,5,6] = ([1,2],[3,4,5,6]
+-- splitAt
+      -- type: Int -> [a] -> ([a],[a])
+      -- desc: takes a list and splits it into two where specified
+      -- ex: splitAt 2 [3,4,5,6] = ([3,4],[5,6])
+-- zip
+      -- type: [a] -> [a] -> [a]
+      -- desc: takes two lists and makes them into pairs
+      -- ex: zip [1,2,3] [3,2,1] = [(1,3),(2,2),(3,1)]
